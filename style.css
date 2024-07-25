@@ -8,15 +8,17 @@
     transition: all .2s linear;
 }
 
-body{
-    background-size: cover;
+body {
+    background-size: auto;
     background-image: linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(meeting.jpg);
+    background-color: #f8f9fa;
 }
 
 h2{
     text-align: center;
 }
 
-.btn{
-    background-color: green;
+.card {
+    margin-bottom: 20px;
 }
+

@@ -1,108 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meeting Room Booking System</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <nav class="navbar navbar-dark ">
         <div class="container">
-            <a class="navbar-brand mx-auto" href="#"><h2>Meeting Room Booking System</h2></a>
+                <a class="navbar-brand mx-auto" href="#"><h2>Meeting Room Booking System</h2></a>
+            <div class="alert alert-success" id="successMessage" style="display: none;"></div>
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <div class="row">
-
-            <div class="col-md-6">
-                <div class="card available-rooms">
-                    <div class="card-header">
-                        <h2>Available Rooms</h2>
-                    </div>
-                    <div class="card-body">
-                        <ul id="roomsList" class="list-group">
-                            <li class="list-group-item" data-room="Conference Room A" data-capacity="10">Conference Room A (Capacity: 10)</li>
-                            <li class="list-group-item" data-room="Meeting Room B" data-capacity="6">Meeting Room B (Capacity: 6)</li>
-                            <li class="list-group-item" data-room="Board Room" data-capacity="20">Board Room (Capacity: 20)</li>
-                        </ul>
-                    </div>
+<div class="container mt-5">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Available Rooms</h2>
                 </div>
-            </div>
-            
-            <div class="col-md-6">
-                <div class="card book-room">
-                    <div class="card-header">
-                        <h2>Book a Room</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="bookingForm">
-                            <div class="form-group">
-                                <label for="room">Room:</label>
-                                <select id="room" class="form-control">
-                                    <option value="Conference Room A">Conference Room A</option>
-                                    <option value="Meeting Room B">Meeting Room B</option>
-                                    <option value="Board Room">Board Room</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date">Date:</label>
-                                <input type="date" id="date" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="startTime">Start Time:</label>
-                                <input type="time" id="startTime" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="endTime">End Time:</label>
-                                <input type="time" id="endTime" class="form-control" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="meetingTitle">Meeting Title:</label>
-                                <input type="text" id="meetingTitle" class="form-control" required>
-                            </div>
-
-                            <button type="button" id="bookRoomButton" class="btn btn-primary btn-block">Book Room</button>
-                        </form>
-                    </div>
+                <div class="card-body">
+                    <ul id="availableRooms" class="list-group">
+                        <li class="list-group-item">Conference Room A (Capacity: <span id="capacityA">10</span>)</li>
+                        <li class="list-group-item">Meeting Room B (Capacity: <span id="capacityB">6</span>)</li>
+                        <li class="list-group-item">Board Room (Capacity: <span id="capacityC">20</span>)</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card your-bookings">
-                    <div class="card-header">
-                        <h2>Your Bookings</h2>
-                    </div>
-                    <div class="card-body">
-                        <table id="bookingsTable" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Room</th>
-                                    <th>Date</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Meeting Title</th>
-                                </tr>
-                            </thead>
-                                <tbody></tbody>
-                        </table>
-                            <ul id="bookingsList" class="list-group"></ul>
-                    </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                   <h2> Book a Room</h2>
+                </div>
+                <div class="card-body">
+                    <form id="bookingForm">
+                        <input type="hidden" id="editingRowId" value="">
+                        <div class="form-group">
+                            <label for="room">Room:</label>
+                            <select class="form-control" id="room">
+                                <option value="A">Conference Room A</option>
+                                <option value="B">Meeting Room B</option>
+                                <option value="C">Board Room</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <input type="date" class="form-control" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime">Start Time:</label>
+                            <input type="time" class="form-control" id="startTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time:</label>
+                            <input type="time" class="form-control" id="endTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Meeting Title:</label>
+                            <input type="text" class="form-control" id="title" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Book Room</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
-    <script src="script.js"></script>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card your-bookings">
+                <div class="card-header">
+                    <h2>Your Bookings</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Room</th>
+                                <th>Date</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Meeting Title</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTable">
+                            <!-- Bookings will be dynamically added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
